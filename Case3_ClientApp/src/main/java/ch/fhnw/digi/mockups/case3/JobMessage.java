@@ -1,7 +1,5 @@
 package ch.fhnw.digi.mockups.case3;
 
-import java.time.LocalDateTime;
-
 public class JobMessage {
 
 	public enum JobType {

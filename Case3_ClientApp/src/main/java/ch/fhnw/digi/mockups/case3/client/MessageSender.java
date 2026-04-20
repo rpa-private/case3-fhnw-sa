@@ -23,7 +23,7 @@ public class MessageSender {
 	 * (Point-to-Point Channel). setPubSubDomain(false) ist wichtig, da es sich
 	 * um eine Queue handelt und nicht um ein Topic.
 	 *
-	 * Die Disposition verarbeitet die Anfrage und antwortet ueber das
+	 * Die Disposition verarbeitet die Anfrage und antwortet über das
 	 * Topic "dispo.jobs.assignments" (empfangen in MessageReceiver).
 	 */
 	void requestJobFromDispo(JobMessage job) {

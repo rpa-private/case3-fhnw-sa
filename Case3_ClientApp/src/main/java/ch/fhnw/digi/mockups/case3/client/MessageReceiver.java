@@ -22,9 +22,9 @@ public class MessageReceiver {
 	private UI ui;
 
 	/**
-	 * Empfaengt neue Auftraege vom Topic "dispo.jobs.new".
+	 * Empfängt neue Aufträge vom Topic "dispo.jobs.new".
 	 * Das Fremdsystem publiziert alle 2 Sekunden einen neuen Job.
-	 * Jeder verbundene Client (Subscriber) erhaelt eine Kopie (Publish-Subscribe Pattern).
+	 * Jeder verbundene Client (Subscriber) erhält eine Kopie (Publish-Subscribe Pattern).
 	 */
 	@JmsListener(destination = "dispo.jobs.new", containerFactory = "myFactory")
 	public void receiveNewJob(JobMessage job) {
@@ -33,8 +33,8 @@ public class MessageReceiver {
 	}
 
 	/**
-	 * Empfaengt Auftragszuweisungen vom Topic "dispo.jobs.assignments".
-	 * Nach einer Anfrage ueber die Queue antwortet die Disposition hier
+	 * Empfängt Auftragszuweisungen vom Topic "dispo.jobs.assignments".
+	 * Nach einer Anfrage über die Queue antwortet die Disposition hier
 	 * mit der Zuweisung. Alle Clients erhalten diese Nachricht, damit
 	 * der zugewiesene Job bei allen aus der offenen Liste entfernt wird.
 	 */
@@ -46,9 +46,11 @@ public class MessageReceiver {
 	}
 
 	/**
-	 * Factory fuer JMS Listener Container.
-	 * setPubSubDomain(true) konfiguriert die Factory fuer Topics (Publish-Subscribe).
-	 * Beide Listener oben hoeren auf Topics, daher ist diese Konfiguration korrekt.
+	 * Factory für JMS Listener Container.
+	 * setPubSubDomain(true) konfiguriert die Factory für Topics (Publish-Subscribe).
+	 * Beide Listener oben hören auf Topics, daher ist diese Konfiguration korrekt.
+	 * 
+	 * Baut Listener Container und sagt Spring Boot wie Nachricht interpretiert werden soll.
 	 */
 	@Bean
 	public DefaultJmsListenerContainerFactory myFactory(ConnectionFactory connectionFactory,
@@ -62,7 +64,7 @@ public class MessageReceiver {
 		return factory;
 	}
 
-	@Bean // Serialisiert Nachrichteninhalt zu/von JSON mittels TextMessage
+	@Bean // Wandelt JSON in JAVA-Objekt um
 	public MessageConverter jacksonJmsMessageConverter() {
 		MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
 		converter.setTargetType(MessageType.TEXT);
